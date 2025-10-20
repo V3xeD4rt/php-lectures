@@ -3,7 +3,7 @@
 namespace App\Repository;
 
 use App\Model\Task;
-class InMemoryTaskRepository implements TaskRepositoryInterface
+class FileTaskRepository implements TaskRepositoryInterface
 {
 
     public function findAll(): array{
