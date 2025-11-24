@@ -1,6 +1,7 @@
 <?php
 
-//declare(strict_types= 1);
+session_start();
+
 require_once __DIR__ ."\\..\\vendor\\autoload.php";
 
 use App\Controller\TaskController;
@@ -24,6 +25,9 @@ switch ($route) {
         break;
     case 'task/delete':
         $controller->delete();
+        break;
+    case 'task/switch-mode':
+        $controller->switchMode();
         break;
     default:
         http_response_code(404);

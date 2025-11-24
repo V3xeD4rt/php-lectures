@@ -49,7 +49,12 @@ class TaskController {
         exit;
     }
 
-    public function getTasks()  {
-        return $this->repository->findAll();
+    public function switchMode() {
+        $mode = $_GET['mode'] ?? 'mysql';
+        if (in_array($mode, ['mysql', 'file'])) {
+            $_SESSION['repository_mode'] = $mode;
+        }
+        header('Location: ?route=task/list');
+        exit;
     }
 }

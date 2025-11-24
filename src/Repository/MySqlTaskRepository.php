@@ -17,7 +17,7 @@ class MySqlTaskRepository implements TaskRepositoryInterface
     
     public function findAll(): array
     {
-        $stmt = $this->pdo->query("SELECT id, title, completed FROM tasks");
+        $stmt = $this->pdo->query("SELECT id, title, completed FROM tasks ORDER BY id DESC");
         $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
         $tasks = [];
         
@@ -39,12 +39,10 @@ class MySqlTaskRepository implements TaskRepositoryInterface
     
     public function toggle(int $taskId): void
     {
-        // Сначала получаем текущий статус
         $stmt = $this->pdo->prepare("SELECT completed FROM tasks WHERE id = :id");
         $stmt->execute([':id' => $taskId]);
         $currentStatus = $stmt->fetchColumn();
         
-        // Переключаем статус
         $newStatus = $currentStatus ? 0 : 1;
         
         $stmt = $this->pdo->prepare("UPDATE tasks SET completed = :completed WHERE id = :id");

@@ -37,11 +37,11 @@ class Container {
                 return new InMemoryTaskRepository();
             
             case TaskRepositoryInterface::class:
-                $repositoryType = $this->config['repository'] ?? 'memory';
+                $repositoryType = $_SESSION['repository_mode'] ?? $this->config['repository'] ?? 'mysql';
                 return match ($repositoryType) {
                     'mysql' => $this->get(MySqlTaskRepository::class),
                     'file' => $this->get(FileTaskRepository::class),
-                    default => $this->get(InMemoryTaskRepository::class)
+                    default => $this->get(MySqlTaskRepository::class)
                 };
             
             case \App\Controller\TaskController::class:

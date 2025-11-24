@@ -7,34 +7,43 @@
 </head>
 
 <body>
-    <div class="header">
-        <h1>Список задач</h1>
-        <?php if (!empty($tasks)): ?>
-        <a href="?route=task/add" class="add-link">+ Добавить задачу</a>
-        <?php endif?>
+    <div>
+        <a href="?route=task/switch-mode&mode=mysql"<?= ($_SESSION['repository_mode'] ?? 'mysql') === 'mysql' ? 'active' : '' ?>">
+            MySQL режим
+        </a>
+        <a href="?route=task/switch-mode&mode=file"<?= ($_SESSION['repository_mode'] ?? 'mysql') === 'file' ? 'active' : '' ?>">
+            File режим
+        </a>
+    </div>
+
+    <div >
+        <h1>Список задач (<?= ($_SESSION['repository_mode'] ?? 'mysql') === 'mysql' ? 'MySQL' : 'File' ?>)</h1>
+        <a href="?route=task/add">+ Добавить задачу</a>
     </div>
     
     <?php if (empty($tasks)): ?>
         <div>
-            <p>Задач нет. Добавить задачи</p>
-            <a href="?route=task/add" class="add-link">+ Добавить задачу</a>
+            <p>Задачи отсутствуют. Добавьте первую задачу!</p>
         </div>
     <?php else: ?>
         <ul>
             <?php foreach ($tasks as $task): ?>
                 <li>
-                    <button <?= $task->isCompleted() ? 'completed' : '' ?> 
+                    <button <?= $task->isCompleted() ? 'completed' : '' ?>" 
                             onclick="location.href='?route=task/toggle&id=<?= $task->getId() ?>'">
                         <?= $task->isCompleted() ? "✓" : "X" ?>
                     </button>
                     
-                    <div>
+                    <div >
                         <?= htmlspecialchars($task->getTitle()) ?>
                     </div>
                     
-                    <div>
+                    <div >
+                        <span >
                             <?= $task->isCompleted() ? "Выполнено" : "Не выполнено" ?>
-                        <button onclick="if(confirm('Удалить задачу?')) location.href='?route=task/delete&id=<?= $task->getId() ?>'">
+                        </span>
+                        <button 
+                                onclick="if(confirm('Удалить задачу?')) location.href='?route=task/delete&id=<?= $task->getId() ?>'">
                             Удалить
                         </button>
                     </div>

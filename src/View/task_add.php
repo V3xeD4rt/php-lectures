@@ -7,7 +7,16 @@
 </head>
 
 <body>
-    <h1>Добавить новую задачу</h1>
+    <div>
+        <a href="?route=task/switch-mode&mode=mysql"<?= ($_SESSION['repository_mode'] ?? 'mysql') === 'mysql' ? 'active' : '' ?>">
+            MySQL режим
+        </a>
+        <a href="?route=task/switch-mode&mode=file"<?= ($_SESSION['repository_mode'] ?? 'mysql') === 'file' ? 'active' : '' ?>">
+            File режим
+        </a>
+    </div>
+
+    <h1>Добавить новую задачу (<?= ($_SESSION['repository_mode'] ?? 'mysql') === 'mysql' ? 'MySQL' : 'File' ?>)</h1>
     
     <form method="POST" action="?route=task/add">
         <div>
