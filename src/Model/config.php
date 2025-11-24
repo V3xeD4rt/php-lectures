@@ -1,17 +1,13 @@
 <?php
-
-namespace App\Model;
-
-class Config
-{
-    public function access(): array
-    {
-        return  ['db' => 
-        ['user'=>'root',
-         'dsn'=>'localhost/3306',
-         'pass'=>'', 
-         'options'=>''],
-         'storage' => '..\storage\tasks.json', 
-         'repository' => 'mysql | file | memory' ];
-    }
-}
+return  [
+    'db' => [
+        'user' => 'root',
+        'dsn' => 'mysql:host=localhost;dbname=taskapp;charset=utf8mb4',
+        'pass' => '', 
+        'options' => [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
+    ],
+    'storage' => [
+        'file' => __DIR__ . '/../storage/tasks.json'
+    ], 
+    'repository' => 'mysql'
+];

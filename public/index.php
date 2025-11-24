@@ -1,21 +1,15 @@
 <?php
 
-declare(strict_types= 1);
+//declare(strict_types= 1);
 require_once __DIR__ ."\\..\\vendor\\autoload.php";
 
-use App\Repository\InMemoryTaskRepository;
 use App\Controller\TaskController;
 use App\Container\Container;
 
-$route = $_GET['route']??'task/list';
+$route = $_GET['route'] ?? 'task/list';
 
-$container = new Container();
-$container->set(InMemoryTaskRepository::class, fn () => new InMemoryTaskRepository());
-$container->set(TaskController::class, function (Container $c) {
-    $repo = $c->get(InMemoryTaskRepository::class);
-    return new TaskController($repo);
-});
-
+$config = require __DIR__ . '/../src/Model/config.php';
+$container = new Container($config);
 $controller = $container->get(TaskController::class);
 
 switch ($route) {
@@ -25,7 +19,13 @@ switch ($route) {
     case 'task/add':
         $controller->add();
         break;
+    case 'task/toggle':
+        $controller->toggle();
+        break;
+    case 'task/delete':
+        $controller->delete();
+        break;
     default:
-    http_response_code(404);
-    echo '404 not found';
+        http_response_code(404);
+        echo '404 not found';
 }
