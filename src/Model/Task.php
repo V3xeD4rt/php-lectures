@@ -28,4 +28,9 @@ class Task
     {
         return $this->completed;
     }
+    public function setCompleted(bool $completed): void
+    {
+        $this->completed = $completed;
+    }
+
 }
