@@ -13,7 +13,7 @@ class FileTaskRepository implements TaskRepositoryInterface
     }
     
     public function findAll(): array
-{
+    {
     if (!file_exists($this->filepath)) {
         return [];
     }
@@ -44,10 +44,10 @@ class FileTaskRepository implements TaskRepositoryInterface
     });
     
     return $tasks;
-}
+    }
     
     public function add($task): void
-{ 
+    { 
     $tasks = $this->findAll();
     
     $maxId = 0;
@@ -78,7 +78,7 @@ class FileTaskRepository implements TaskRepositoryInterface
     }
     
     file_put_contents($this->filepath, json_encode($data, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
-}
+    }
     
     public function toggle(int $taskId): void
     {

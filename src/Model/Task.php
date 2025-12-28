@@ -23,22 +23,9 @@ class Task
     {
         return $this->title;
     }
-    
-    public function setTitle(string $title): void
-    {
-        $this->title = $title;
-    }
 
     public function isCompleted(): bool
     {
         return $this->completed;
-    }
-
-    public function complete(): void {
-        $this->completed = true;
-    }
-    
-    public function setCompleted(bool $completed): void {
-        $this->completed = $completed;
     }
 }

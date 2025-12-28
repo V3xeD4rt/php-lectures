@@ -21,18 +21,18 @@
     <form method="POST" action="?route=task/add">
         <div>
             <label for="title">Название задачи:</label>
-            <input type="text" id="title" name="title" required 
-                   placeholder="Введите название задачи..." 
-                   value="<?= htmlspecialchars($_POST['title'] ?? '') ?>">
-            <?php if ($_SERVER['REQUEST_METHOD'] === 'POST' && empty(trim($_POST['title'] ?? ''))): ?>
-                <div>Пожалуйста, введите название задачи</div>
-            <?php endif; ?>
+                <input type="text" id="title" name="title" required 
+                       placeholder="Введите название задачи..." 
+                       value="<?= htmlspecialchars($_POST['title'] ?? '') ?>">
+                <?php if ($_SERVER['REQUEST_METHOD'] === 'POST' && empty(trim($_POST['title'] ?? ''))): ?>
+                    <div class="error">Пожалуйста, введите название задачи</div>
+                <?php endif; ?>
         </div>
         
         <button type="submit">Добавить задачу</button>
     </form>
     
-    <a href="?route=task/list">← Вернуться к списку задач</a>
+    <a href="?route=task/list">← Вернуться к списку</a>
 </body>
 
 </html>

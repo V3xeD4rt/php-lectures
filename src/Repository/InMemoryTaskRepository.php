@@ -7,7 +7,7 @@ use App\Model\Task;
 class InMemoryTaskRepository implements TaskRepositoryInterface
 {
     private array $tasks = [];
-
+//сохранить в локалке
     public function __construct() {
         $this->tasks = [
             new Task("Купить кофе", false, 3),

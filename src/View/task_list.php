@@ -8,17 +8,17 @@
 
 <body>
     <div>
-        <a href="?route=task/switch-mode&mode=mysql"<?= ($_SESSION['repository_mode'] ?? 'mysql') === 'mysql' ? 'active' : '' ?>">
+         <a href="?route=task/switch-mode&mode=mysql" class="mode-btn <?= ($_SESSION['repository_mode'] ?? 'mysql') === 'mysql' ? 'active' : '' ?>">
             MySQL режим
         </a>
-        <a href="?route=task/switch-mode&mode=file"<?= ($_SESSION['repository_mode'] ?? 'mysql') === 'file' ? 'active' : '' ?>">
+        <a href="?route=task/switch-mode&mode=file" class="mode-btn <?= ($_SESSION['repository_mode'] ?? 'mysql') === 'file' ? 'active' : '' ?>">
             File режим
         </a>
     </div>
 
     <div >
         <h1>Список задач (<?= ($_SESSION['repository_mode'] ?? 'mysql') === 'mysql' ? 'MySQL' : 'File' ?>)</h1>
-        <a href="?route=task/add">+ Добавить задачу</a>
+        <a href="?route=task/add" class="add-link">+ Добавить задачу</a>
     </div>
     
     <?php if (empty($tasks)): ?>
@@ -29,9 +29,9 @@
         <ul>
             <?php foreach ($tasks as $task): ?>
                 <li>
-                    <button <?= $task->isCompleted() ? 'completed' : '' ?>" 
+                    <button class="task-toggle <?= $task->isCompleted() ? 'completed' : '' ?>" 
                             onclick="location.href='?route=task/toggle&id=<?= $task->getId() ?>'">
-                        <?= $task->isCompleted() ? "✓" : "X" ?>
+                        <?= $task->isCompleted() ? "✓" : "" ?>
                     </button>
                     
                     <div >
