@@ -5,7 +5,6 @@ namespace App\Container;
 use App\Repository\{
     TaskRepositoryInterface,
     FileTaskRepository,
-    InMemoryTaskRepository,
     MySqlTaskRepository
 };
 use App\Controller\TaskController;
@@ -60,10 +59,6 @@ class Container
                 return new MySqlTaskRepository(
                     $this->get(PDO::class)
                 );
-
-            // In-memory (не обязателен, учебный)
-            case InMemoryTaskRepository::class:
-                return new InMemoryTaskRepository();
 
             // Выбор реализации интерфейса
             case TaskRepositoryInterface::class:
